@@ -38,7 +38,7 @@ export class JsonPostRepository implements PostRepository {
   }
 }
 
-export const postRepository: PostRepository = new JsonPostRepository();
+
 
 //postRepository.findAll().then((jsonContent) => console.log(jsonContent));
 
