@@ -38,8 +38,6 @@ export class JsonPostRepository implements PostRepository {
   }
 }
 
-
-
 //postRepository.findAll().then((jsonContent) => console.log(jsonContent));
 
 (async () => {
