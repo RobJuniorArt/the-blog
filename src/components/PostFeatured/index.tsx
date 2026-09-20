@@ -1,10 +1,14 @@
 import clsx from "clsx";
 import { PostCoverImage } from "../PostCoverImage";
-import { PostHeading } from "../PostHeading";
+import { PostSummary } from "../PostSummary";
 
 export function PostFeatured() {
   const post = {
     slug: "futura query",
+    createdAt: "2025-04-08T00:24:38.616Z",
+    title: "Rotina matinal de pessoas altamente eficazes",
+    excerpt:
+      "O Next.js também é uma boa escolha para quem quer se preocupar com performance e SEO.",
   };
   const postLink = `/post/${post.slug}`;
 
@@ -24,25 +28,13 @@ export function PostFeatured() {
           priority: true,
         }}
       />
-      <div className="flex flex-col gap-4 sm:justify-center">
-        <time
-          className="text-slate-600 block text-sm/tight"
-          dateTime="2025-04-20"
-        >
-          20/04/2026 10:00
-        </time>
-
-        <PostHeading as="h1" url={postLink}>
-          Post do meu blog
-        </PostHeading>
-
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error,
-          illum. Veniam incidunt molestias ullam, ipsam repellat exercitationem
-          dolor deserunt facere doloremque nulla eaque quisquam sunt praesentium
-          aliquam. Vitae, deleniti temporibus!
-        </p>
-      </div>
+      <PostSummary
+        postLink={postLink}
+        postHeading="h1"
+        createdAt={post.createdAt}
+        title={post.title}
+        excerpt={post.excerpt}
+      />
     </section>
   );
 }
