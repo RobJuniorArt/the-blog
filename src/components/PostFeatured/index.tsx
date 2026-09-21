@@ -1,15 +1,12 @@
 import clsx from "clsx";
 import { PostCoverImage } from "../PostCoverImage";
 import { PostSummary } from "../PostSummary";
+import { findAllPublicPosts } from "@/lib/post/queries";
 
-export function PostFeatured() {
-  const post = {
-    slug: "futura query",
-    createdAt: "2025-04-08T00:24:38.616Z",
-    title: "Rotina matinal de pessoas altamente eficazes",
-    excerpt:
-      "O Next.js também é uma boa escolha para quem quer se preocupar com performance e SEO.",
-  };
+export async function PostFeatured() {
+  const posts = await findAllPublicPosts();
+  const post = posts[0];
+
   const postLink = `/post/${post.slug}`;
 
   return (
@@ -23,8 +20,8 @@ export function PostFeatured() {
         imageProps={{
           width: 1200,
           height: 720,
-          src: "/images/bryen_9.png",
-          alt: "Titulo da imagem",
+          src: post.coverImageUrl,
+          alt: post.title,
           priority: true,
         }}
       />

@@ -1,6 +1,5 @@
 import { formatDateTime, formatDistanceToNow } from "@/utils/format-datetime";
 import { PostHeading } from "../PostHeading";
-import { PostModel } from "@/models/post/post-model";
 
 type PostSummaryProps = {
   postHeading: "h1" | "h2";
