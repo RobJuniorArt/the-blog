@@ -8,7 +8,7 @@ type PostSlugPageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export async function generateMetaData({
+export async function generateMetadata({
   params,
 }: PostSlugPageProps): Promise<Metadata> {
   const { slug } = await params;
