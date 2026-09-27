@@ -19,4 +19,9 @@ export function formatDistanceToNow(rawDate: string): string {
   });
 }
 
-console.log(formatDateTime);
+export function formatHour(timestampsMs: number): string {
+  const date = new Date(timestampsMs);
+  return format(date, "HH:mm:ss", {
+    locale: ptBR,
+  });
+}
