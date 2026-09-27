@@ -1,5 +1,3 @@
-import { JsonPostRepository } from "./json-post-repository";
-
 import { DrizzlePostRepository } from "./drizzle-post-repository";
 import { PostRepository } from "./post-repository";
 
