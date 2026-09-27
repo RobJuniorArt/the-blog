@@ -1,7 +1,7 @@
 import { PostModel } from "@/models/post/post-model";
 import { PostRepository } from "./post-repository";
 import { drizzleDb } from "@/db/drizzle/index";
-import { desc, eq } from "drizzle-orm";
+import { desc, eq, and } from "drizzle-orm";
 import { postsTable } from "@/db/drizzle/schemas";
 
 export class DrizzlePostRepository implements PostRepository {
@@ -14,43 +14,38 @@ export class DrizzlePostRepository implements PostRepository {
     return posts;
   }
 
-  async findBySlugPublic(slug: string): Promise<PostModel> {}
+  async findBySlugPublic(slug: string): Promise<PostModel> {
+    const post = await drizzleDb
+      .select()
+      .from(postsTable)
+      .where(and(eq(postsTable.published, true), eq(postsTable.slug, slug)));
+    //validar se nao pode dar erro no return
+    if (!post[0]) {
+      throw new Error(`Post with slug "${slug}" not found`);
+    }
+    return post[0];
+  }
 
-  async findAll(): Promise<PostModel[]> {}
+  async findAll(): Promise<PostModel[]> {
+    const posts = await drizzleDb.select().from(postsTable);
+    return posts;
+  }
 
-  async findById(id: string): Promise<PostModel> {}
-
-  // async findAllPublic(): Promise<PostModel[]> {
-  //   const posts = await drizzleDb
-  //     .select()
-  //     .from(postsTable)
-  //     .where(eq(postsTable.published, true));
-  //   return posts;
-  // }
-  // async findById(id: string): Promise<PostModel> {
-  //   const posts = await drizzleDb
-  //     .select()
-  //     .from(postsTable)
-  //     .where(eq(postsTable.id, id));
-  //   if (!posts[0]) {
-  //     throw new Error(`Post with id "${id}" not found`);
-  //   }
-  //   return posts[0];
-  // }
-  // async findBySlug(slug: string): Promise<PostModel> {
-  //   const posts = await drizzleDb
-  //     .select()
-  //     .from(postsTable)
-  //     .where(eq(postsTable.slug, slug));
-  //   if (!posts[0]) {
-  //     throw new Error(`Post with slug "${slug}" not found`);
-  //   }
-  //   return posts[0];
-  // }
+  async findById(id: string): Promise<PostModel> {
+    const post = await drizzleDb
+      .select()
+      .from(postsTable)
+      .where(eq(postsTable.id, id));
+    if (!post[0]) {
+      throw new Error(`Post with id "${id}" not found`);
+    }
+    return post[0];
+  }
 }
 
 (async () => {
   const repo = new DrizzlePostRepository();
-  const posts = await repo.findAllPublic();
-  posts.forEach((post) => console.log(`${post.title}, (${post.published})`));
+  const posts = await repo.findById("6b204dab-2312-4525-820a-a0463560835f");
+  //posts.forEach((post) => console.log(`${post.title}, (${post.published})`));
+  //console.log(posts);
 })();
