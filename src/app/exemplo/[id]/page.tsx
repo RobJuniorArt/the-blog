@@ -17,13 +17,16 @@ export default async function ExampleDinamicPage({
         Hora: {hour} (id: {id})
       </div>
 
-      <form
-        className="py-16 bg-amber-500 p-2 rounded hover:bg-amber-600 transition cursor-pointer"
-        action={revalidateExampleAction}
-      >
-        <input type="hidden" defaultValue={"/exemplo/${id}"} />
-        <button type="submit">revalidate</button>
+      <form className="py-16" action={revalidateExampleAction}>
+        <input type="hidden" name="path" defaultValue={"/exemplo/${id}"} />
+        <button
+          className="bg-amber-500 p-2 rounded hover:bg-amber-600 transition cursor-pointer"
+          type="submit"
+        >
+          revalidate
+        </button>
       </form>
     </main>
   );
 }
+0;
