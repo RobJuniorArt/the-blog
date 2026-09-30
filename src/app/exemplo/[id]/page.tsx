@@ -23,12 +23,7 @@ export default async function ExampleDinamicPage({
   return (
     <main className="min-h-150 text-5xl font-bold">
       <div>
-        Hora: {hour} (id: {id})
-      </div>
-
-      {/* Exibindo na tela para confirmar que funcionou */}
-      <div className="text-2xl text-blue-500 my-4">
-        Usuário retornado: {userName}
+        name: {userName} Hora: {hour} (id: {id})
       </div>
 
       <form className="py-16" action={revalidateExampleAction}>
