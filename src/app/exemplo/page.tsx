@@ -1,3 +1,5 @@
+"use cache";
+
 import { formatHour } from "@/utils/format-datetime";
 
 export const dynamic = "force-dynamic";
