@@ -11,7 +11,10 @@ export default async function ExampleDinamicPage({
 
   // Passamos { cache: "no-store" } para forçar a busca de um novo usuário a cada render
   const response = await fetch("https://randomuser.me/api/?results=1", {
-    cache: "no-store",
+    next: {
+      tags: ["randomuser"],
+      revalidate: 5,
+    },
   });
 
   const json = await response.json();
