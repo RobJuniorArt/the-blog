@@ -7,5 +7,5 @@ export async function revalidateExampleAction(formData: FormData) {
   console.log("Estou em uma server action");
 
   // revalidatePath(`${path}`);
-  revalidateTag("randomuser", "max");
+  revalidateTag("ExemploDynamicPage", "max");
 }
