@@ -6,6 +6,7 @@ export default async function ExampleDinamicPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
+  
   const { id } = await params;
   const hour = await formatHourCached();
 
