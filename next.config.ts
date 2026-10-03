@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
     seconds: {
       stale: 0,
       revalidate: 10,
-      expire: 10,
+      expire: 300,
     },
   },
 };
