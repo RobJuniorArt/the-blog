@@ -1,5 +1,5 @@
 import { revalidateExampleAction } from "@/actions/revalidate-examples";
-import { formatHour } from "@/utils/format-datetime";
+import { formatHourCached } from "@/utils/format-datetime";
 
 export default async function ExampleDinamicPage({
   params,
@@ -7,7 +7,7 @@ export default async function ExampleDinamicPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const hour = formatHour(Date.now());
+  const hour = await formatHourCached();
 
   // Passamos { cache: "no-store" } para forçar a busca de um novo usuário a cada render
   const response = await fetch("https://randomuser.me/api/?results=1", {

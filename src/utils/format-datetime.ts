@@ -30,6 +30,6 @@ export function formatHour(timestampsMs: number): string {
 export async function formatHourCached() {
   "use cache";
   cacheLife("seconds");
-  revalidateTag("ExemploDynamicPage", "page");
+  revalidateTag("formatHourCached", "page");
   return formatHour(Date.now());
 }
