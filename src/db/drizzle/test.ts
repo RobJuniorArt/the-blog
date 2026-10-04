@@ -1,15 +1,15 @@
-import { eq } from "drizzle-orm";
-import { drizzleDb } from ".";
-import { postsTable } from "./schemas";
+// import { eq } from "drizzle-orm";
+// import { drizzleDb } from ".";
+// import { postsTable } from "./schemas";
 
-(async () => {
-  await drizzleDb
-    .update(postsTable)
-    .set({
-      title: "Rotina matinal de pessoas altamente eficazes",
-      published: true,
-    })
-    .where(eq(postsTable.slug, "rotina-matinal-de-pessoas-altamente-eficazes"));
+// (async () => {
+//   await drizzleDb
+//     .update(postsTable)
+//     .set({
+//       title: "Rotina matinal de pessoas altamente eficazes",
+//       published: true,
+//     })
+//     .where(eq(postsTable.slug, "rotina-matinal-de-pessoas-altamente-eficazes"));
 
-  console.log("Título atualizado com sucesso!");
-})();
+//   console.log("Título atualizado com sucesso!");
+// })();
