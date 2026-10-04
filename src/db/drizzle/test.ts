@@ -6,7 +6,7 @@ import { postsTable } from "./schemas";
   await drizzleDb
     .update(postsTable)
     .set({
-      title: "4 Rotina matinal de pessoas altamente eficazes",
+      title: "Rotina matinal de pessoas altamente eficazes",
       published: true,
     })
     .where(eq(postsTable.slug, "rotina-matinal-de-pessoas-altamente-eficazes"));
