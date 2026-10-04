@@ -1,36 +1,32 @@
 import { postRepository } from "@/repositories/post";
-import { unstable_cache } from "next/cache";
 import { notFound } from "next/navigation";
-import { cache } from "react";
+import { cacheLife, cacheTag } from "next/cache";
 
-export const findAllPublicPostsCached = unstable_cache(
-  cache(async () => {
-    return await postRepository.findAllPublic(); // Adicionado o return aqui
-  }),
-  ["posts"],
-  {
-    tags: ["posts"],
-  },
-);
+export async function findAllPublicPostsCached() {
+  "use cache";
+  cacheLife("hours");
+  cacheTag("posts");
+  return await postRepository.findAllPublic();
+}
 
-// Immediately invoked function (função auto-executável para passar o slug)
-export const findPostBySlugCached = (slug: string) =>
-  unstable_cache(
-    cache(async (slug: string) => {
-      const post = await postRepository
-        .findBySlugPublic(slug)
-        .catch(() => undefined);
+export async function findPostBySlugCached(slug: string) {
+  "use cache";
+  cacheLife("hours");
+  cacheTag(`post-${slug}`);
 
-      if (!post) notFound();
+  const post = await postRepository
+    .findBySlugPublic(slug)
+    .catch(() => undefined);
 
-      return post;
-    }),
-    ["posts"],
-    {
-      tags: [`post-${slug}`],
-    },
-  )(slug);
+  if (!post) notFound();
 
-export const findPostByIdCached = cache(
-  async (id: string) => await postRepository.findById(id),
-);
+  return post;
+}
+
+export async function findPostByIdCached(id: string) {
+  "use cache";
+  cacheLife("hours");
+  cacheTag(`post-id-${id}`);
+
+  return await postRepository.findById(id);
+}

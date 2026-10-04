@@ -1,11 +1,18 @@
 import { revalidateExampleAction } from "@/actions/revalidate-examples";
 import { formatHour } from "@/utils/format-datetime";
+import { connection } from "next/server";
+
 export const instant = false;
+
+type ExampleDinamicPageProps = {
+  params: Promise<{ id: string }>;
+};
+
 export default async function ExampleDinamicPage({
   params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
+}: ExampleDinamicPageProps) {
+  await connection();
+
   const { id } = await params;
   const hour = formatHour(Date.now());
 
@@ -30,7 +37,6 @@ export default async function ExampleDinamicPage({
       </div>
 
       <form className="py-16" action={revalidateExampleAction}>
-        {/* Ajustado de aspas duplas para crases ` ` */}
         <input type="hidden" name="path" defaultValue={`/exemplo/${id}`} />
         <button
           className="bg-amber-500 p-2 rounded hover:bg-amber-600 transition cursor-pointer text-base text-black"
