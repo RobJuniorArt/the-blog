@@ -1,6 +1,6 @@
 import { revalidateExampleAction } from "@/actions/revalidate-examples";
 import { formatHour } from "@/utils/format-datetime";
-
+export const instant = false;
 export default async function ExampleDinamicPage({
   params,
 }: {

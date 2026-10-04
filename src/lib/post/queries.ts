@@ -5,20 +5,31 @@ import { cache } from "react";
 
 export const findAllPublicPostsCached = unstable_cache(
   cache(async () => {
-    await postRepository.findAllPublic();
+    return await postRepository.findAllPublic(); // Adicionado o return aqui
   }),
-  ['']
+  ["posts"],
+  {
+    tags: ["posts"],
+  },
 );
 
-export const findPostBySlugCached = cache(async (slug: string) => {
-  const post = await postRepository
-    .findBySlugPublic(slug)
-    .catch(() => undefined);
+// Immediately invoked function (função auto-executável para passar o slug)
+export const findPostBySlugCached = (slug: string) =>
+  unstable_cache(
+    cache(async (slug: string) => {
+      const post = await postRepository
+        .findBySlugPublic(slug)
+        .catch(() => undefined);
 
-  if (!post) notFound();
+      if (!post) notFound();
 
-  return post;
-});
+      return post;
+    }),
+    ["posts"],
+    {
+      tags: [`post-${slug}`],
+    },
+  )(slug);
 
 export const findPostByIdCached = cache(
   async (id: string) => await postRepository.findById(id),
