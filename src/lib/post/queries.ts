@@ -1,9 +1,13 @@
 import { postRepository } from "@/repositories/post";
+import { unstable_cache } from "next/cache";
 import { notFound } from "next/navigation";
 import { cache } from "react";
 
-export const findAllPublicPostsCached = cache(
-  async () => await postRepository.findAllPublic(),
+export const findAllPublicPostsCached = unstable_cache(
+  cache(async () => {
+    await postRepository.findAllPublic();
+  }),
+  ['']
 );
 
 export const findPostBySlugCached = cache(async (slug: string) => {
