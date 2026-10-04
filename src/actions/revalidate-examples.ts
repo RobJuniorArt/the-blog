@@ -12,6 +12,6 @@ export async function revalidateExampleAction(formData: FormData) {
   }
 
   // revalidatePath(`${path}`);
-  revalidateTag("posts", "max");
-  revalidateTag("post-rotina-matinal-de-pessoas-altamente-eficazes", "max");
+  revalidateTag("posts", "max"); //home
+  revalidateTag("post-rotina-matinal-de-pessoas-altamente-eficazes", "max"); //singe
 }
