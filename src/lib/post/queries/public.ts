@@ -9,7 +9,7 @@ export async function findAllPublicPostsCached() {
   return await postRepository.findAllPublic();
 }
 
-export async function findPostBySlugCached(slug: string) {
+export async function findPublicPostBySlugCached(slug: string) {
   "use cache";
   cacheLife("hours");
   cacheTag(`post-${slug}`);
