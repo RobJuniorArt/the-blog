@@ -23,10 +23,4 @@ export async function findPublicPostBySlugCached(slug: string) {
   return post;
 }
 
-export async function findPostByIdCached(id: string) {
-  "use cache";
-  cacheLife("hours");
-  cacheTag(`post-id-${id}`);
 
-  return await postRepository.findById(id);
-}
