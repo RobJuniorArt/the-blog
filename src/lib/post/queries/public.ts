@@ -22,5 +22,3 @@ export async function findPublicPostBySlugCached(slug: string) {
 
   return post;
 }
-
-
