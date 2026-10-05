@@ -3,7 +3,7 @@ import { SpinLoader } from "@/components/SpinLoader";
 import { findPublicPostBySlugCached } from "@/lib/post/queries/public";
 import { Metadata } from "next";
 import { Suspense } from "react";
-
+export const instant = false;
 type PostSlugPageProps = {
   params: Promise<{ slug: string }>;
 };
