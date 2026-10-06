@@ -32,6 +32,8 @@ export default async function PostListAdmin() {
                 "[&_svg]:w-4 [&_svg]:h-4",
                 "hover:scale-120 hover:text-red-700",
               )}
+              aria-label={`Apagar post: ${post.title}`}
+              title={`Apagar post: ${post.title}`}
             >
               <Trash2Icon />
             </button>
