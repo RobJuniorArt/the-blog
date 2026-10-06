@@ -25,7 +25,14 @@ export default async function PostListAdmin() {
               </span>
             )}
 
-            <button>
+            <button
+              className={clsx(
+                "text-red-500 transition",
+                "cursor-pointer",
+                "[&_svg]:w-4 [&_svg]:h-4",
+                "hover:scale-120 hover:text-red-700",
+              )}
+            >
               <Trash2Icon />
             </button>
           </div>
