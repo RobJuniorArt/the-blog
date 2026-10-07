@@ -1,4 +1,3 @@
-import { revalidateExampleAction } from "@/actions/revalidate-examples";
 import { formatHour } from "@/utils/format-datetime";
 import { connection } from "next/server";
 
@@ -36,7 +35,7 @@ export default async function ExampleDinamicPage({
         name: {userName} Hora: {hour} (id: {id})
       </div>
 
-      <form className="py-16" action={revalidateExampleAction}>
+      {/* <form className="py-16" action={revalidateExampleAction}>
         <input type="hidden" name="path" defaultValue={`/exemplo/${id}`} />
         <button
           className="bg-amber-500 p-2 rounded hover:bg-amber-600 transition cursor-pointer text-base text-black"
@@ -44,7 +43,7 @@ export default async function ExampleDinamicPage({
         >
           revalidate
         </button>
-      </form>
+      </form> */}
     </main>
   );
 }
