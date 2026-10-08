@@ -1,3 +1,4 @@
+import { deletePostAction } from "@/actions/post/delete-post-action";
 import clsx from "clsx";
 import { Trash2Icon } from "lucide-react";
 
@@ -7,8 +8,9 @@ type DeletePostButtonProps = {
 };
 
 export function DeletePostButton({ id, title }: DeletePostButtonProps) {
-  function handleClick() {
-    alert("botao clicado" + id);
+  async function handleClick() {
+    const result = await deletePostAction(id);
+    alert(`o result é: ${result}`);
   }
 
   return (
