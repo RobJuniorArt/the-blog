@@ -32,8 +32,30 @@ export default async function PostListAdmin() {
       })}
 
       <div
-        className={clsx("fixed bg-black top-0 bottom-0 left-0 right-0 ", '')}
-      ></div>
+        className={clsx(
+          "fixed z-50 bg-black/50 inset-0 backdrop-blur-xs",
+          "flex items-center justify-center",
+        )}
+      >
+        <div
+          className={clsx(
+            "bg-slate-100 p-6 rounded-lg max-w-2xl mx-6",
+            "flex flex-col gap-6",
+          )}
+        >
+          <h3>Titulo do dialogo</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut,
+            repellendus assumenda. Necessitatibus totam fugiat ducimus
+            excepturi. Minima laboriosam, sint iste distinctio itaque voluptates
+            dolores ea, quibusdam, quidem quasi alias est?
+          </p>
+          <div>
+            <button>Cancelar</button>
+            <button>Ok</button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
