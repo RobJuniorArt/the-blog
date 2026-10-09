@@ -11,7 +11,9 @@ type DeletePostButtonProps = {
 
 export function DeletePostButton({ id, title }: DeletePostButtonProps) {
   const [isPending, startTransition] = useTransition();
-  async function handleClick() {
+
+  function handleClick() {
+    if (!confirm("Tem certeza?")) return;
     startTransition(async () => {
       const result = await deletePostAction(id);
       alert(`o result é: ${result}`);

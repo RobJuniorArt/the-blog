@@ -30,6 +30,10 @@ export default async function PostListAdmin() {
           </div>
         );
       })}
+
+      <div
+        className={clsx("fixed bg-black top-0 bottom-0 left-0 right-0 ", '')}
+      ></div>
     </div>
   );
 }
