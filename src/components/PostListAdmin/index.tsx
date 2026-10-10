@@ -41,9 +41,10 @@ export default async function PostListAdmin() {
           className={clsx(
             "bg-slate-100 p-6 rounded-lg max-w-2xl mx-6",
             "flex flex-col gap-6",
+            "shadow-lg shado-black/30 text-center",
           )}
         >
-          <h3>Titulo do dialogo</h3>
+          <h3 className="text-xl font-extrabold">Titulo do dialogo</h3>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut,
             repellendus assumenda. Necessitatibus totam fugiat ducimus
