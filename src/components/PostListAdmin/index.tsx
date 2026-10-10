@@ -50,7 +50,7 @@ export default async function PostListAdmin() {
             excepturi. Minima laboriosam, sint iste distinctio itaque voluptates
             dolores ea, quibusdam, quidem quasi alias est?
           </p>
-          <div>
+          <div className="flex items-center">
             <button>Cancelar</button>
             <button>Ok</button>
           </div>
