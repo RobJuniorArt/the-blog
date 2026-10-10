@@ -51,8 +51,25 @@ export default async function PostListAdmin() {
             dolores ea, quibusdam, quidem quasi alias est?
           </p>
           <div className="flex items-center justify-around">
-            <button>Cancelar</button>
-            <button>Ok</button>
+            <button
+              className={clsx(
+                "bg-slate-300 hover:bg-slate-400 transition text-slate-950",
+                "flex items-center justify-center",
+                "py-2 px-4 rounded-lg cursor-pointer",
+              )}
+              autoFocus
+            >
+              Cancelar
+            </button>
+            <button
+              className={clsx(
+                "bg-blue-500 hover:bg-blue-600 transition text-blue-50",
+                "flex items-center justify-center",
+                "py-2 px-4 rounded-lg cursor-pointer",
+              )}
+            >
+              Ok
+            </button>
           </div>
         </div>
       </div>
