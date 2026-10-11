@@ -22,9 +22,15 @@ export function Dialog({ isVisible = false, title, content }: DialogProps) {
           "flex flex-col gap-6",
           "shadow-lg shado-black/30 text-center",
         )}
+        role="dialog"
+        aria-modal={true}
+        aria-labelledby="dialog-title"
+        aria-describedby="dialog-descrip tion"
       >
-        <h3 className="text-xl font-extrabold">{title}</h3>
-        <p>{content}</p>
+        <h3 id="dialog-title" className="text-xl font-extrabold">
+          {title}
+        </h3>
+        <div id="dialog-description">{content}</div>
         <div className="flex items-center justify-around">
           <button
             className={clsx(
