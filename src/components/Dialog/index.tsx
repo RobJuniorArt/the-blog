@@ -8,6 +8,7 @@ type DialogProps = {
   content: React.ReactNode;
   onConfirm: () => void;
   onCancel: () => void;
+  disabled: boolean;
 };
 
 export function Dialog({
@@ -16,6 +17,7 @@ export function Dialog({
   content,
   onCancel,
   onConfirm,
+  disabled,
 }: DialogProps) {
   if (!isVisible) return null;
 
@@ -25,6 +27,7 @@ export function Dialog({
         "fixed z-50 bg-black/50 inset-0 backdrop-blur-xs",
         "flex items-center justify-center",
       )}
+      onClick={onCancel}
     >
       <div
         className={clsx(
@@ -36,6 +39,7 @@ export function Dialog({
         aria-modal={true}
         aria-labelledby="dialog-title"
         aria-describedby="dialog-descrip tion"
+        onClick={(e) => e.stopPropagation()}
       >
         <h3 id="dialog-title" className="text-xl font-extrabold">
           {title}
@@ -47,9 +51,11 @@ export function Dialog({
               "bg-slate-300 hover:bg-slate-400 transition text-slate-950",
               "flex items-center justify-center",
               "py-2 px-4 rounded-lg cursor-pointer",
+              "disabled:bg-slate-200 disabled:text-slate-400 disabled:cursor-not-allowed",
             )}
             autoFocus
             onClick={onCancel}
+            disabled={disabled}
           >
             Cancelar
           </button>
@@ -58,8 +64,10 @@ export function Dialog({
               "bg-blue-500 hover:bg-blue-600 transition text-blue-50",
               "flex items-center justify-center",
               "py-2 px-4 rounded-lg cursor-pointer",
+              "disabled:bg-slate-200 disabled:text-slate-400 disabled:cursor-not-allowed",
             )}
             onClick={onConfirm}
+            disabled={disabled}
           >
             Ok
           </button>

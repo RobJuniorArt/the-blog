@@ -50,6 +50,7 @@ export function DeletePostButton({ id, title }: DeletePostButtonProps) {
           content={`Tem certeza que deseja apagar o post: ${title}`}
           onCancel={() => setShowDialog(false)}
           onConfirm={handleConfirm}
+          disabled={isPending}
         />
       )}
     </>
