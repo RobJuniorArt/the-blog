@@ -6,9 +6,17 @@ type DialogProps = {
   isVisible: boolean;
   title: string;
   content: React.ReactNode;
+  onConfirm: () => void;
+  onCancel: () => void;
 };
 
-export function Dialog({ isVisible = false, title, content }: DialogProps) {
+export function Dialog({
+  isVisible = false,
+  title,
+  content,
+  onCancel,
+  onConfirm,
+}: DialogProps) {
   if (!isVisible) return null;
 
   return (
@@ -41,6 +49,7 @@ export function Dialog({ isVisible = false, title, content }: DialogProps) {
               "py-2 px-4 rounded-lg cursor-pointer",
             )}
             autoFocus
+            onClick={onCancel}
           >
             Cancelar
           </button>
@@ -50,6 +59,7 @@ export function Dialog({ isVisible = false, title, content }: DialogProps) {
               "flex items-center justify-center",
               "py-2 px-4 rounded-lg cursor-pointer",
             )}
+            onClick={onConfirm}
           >
             Ok
           </button>
