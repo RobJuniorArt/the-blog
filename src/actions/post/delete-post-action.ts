@@ -6,6 +6,7 @@ import { postRepository } from "@/repositories/post";
 import { asyncDelay } from "@/utils/async-delay";
 import { logColor } from "@/utils/log-color";
 import { eq } from "drizzle-orm";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 export async function deletePostAction(id: string) {
   //todo: checar login do usuario
@@ -31,6 +32,7 @@ export async function deletePostAction(id: string) {
   await drizzleDb.delete(postsTable).where(eq(postsTable.id, id));
 
   //todo: revalidatetag ou revalidatepath
+  revalidatePath("/admin/post");
 
   return {
     error: "",
