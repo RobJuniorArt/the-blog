@@ -33,6 +33,7 @@ export async function deletePostAction(id: string) {
 
   //todo: revalidatetag ou revalidatepath
   revalidatePath("/admin/post");
+  revalidatePath(`/post/${post.slug}`); // Atualiza a página pública individual do post
 
   return {
     error: "",
