@@ -2,9 +2,15 @@ import clsx from "clsx";
 import { PostCoverImage } from "../PostCoverImage";
 import { PostSummary } from "../PostSummary";
 import { findAllPublicPostsCached } from "@/lib/post/queries/public";
+import ErrorMessage from "../ErrorMessage";
 
 export async function PostFeatured() {
   const posts = await findAllPublicPostsCached();
+
+  if (posts.length <= 0)
+    return (
+      <ErrorMessage contentTitle="Ei! 😅" content="Bora criar algum post?" />
+    );
 
   if (!posts || posts.length === 0) {
     return null; // ou exiba uma mensagem amigável
