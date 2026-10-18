@@ -1,8 +1,12 @@
+"use client";
+
 import clsx from "clsx";
 import { FileText, HouseIcon } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 
 export function MenuAdmin() {
+  const [isOpen, setIsOpen] = useState(false);
   const navClasses = clsx(
     "bg-slate-900 text-slate-100 ",
     "flex flex-col mb-8",
