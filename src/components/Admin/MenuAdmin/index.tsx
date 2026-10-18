@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import { FileText, HouseIcon } from "lucide-react";
+import { CircleXIcon, FileText, HouseIcon, MenuIcon } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -22,8 +22,23 @@ export function MenuAdmin() {
     "shrink-0",
   );
   return (
-    <nav>
-      <a href="/" target="blank">
+    <nav className={navClasses}>
+      <button>
+        {!isOpen && (
+          <>
+            <MenuIcon />
+            Menu
+          </>
+        )}
+
+        {isOpen && (
+          <>
+            <CircleXIcon />
+            Fechar
+          </>
+        )}
+      </button>
+      <a className={linkClasses} href="/" target="blank">
         <HouseIcon />
         Home
       </a>
