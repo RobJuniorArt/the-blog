@@ -11,8 +11,8 @@ export function MenuAdmin() {
     "bg-slate-900 text-slate-100 ",
     "flex flex-col mb-8",
     "sm:flex-row sm:flex-wrap",
-    //"h-10",
-    //"overflow-hidden",
+    !isOpen && "h-10",
+    !isOpen && "overflow-hidden",
   );
   const linkClasses = clsx(
     "[&>svg]:w-[16px] [&>svg]:h-[16px] px-4",
