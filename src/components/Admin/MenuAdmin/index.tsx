@@ -16,14 +16,16 @@ export function MenuAdmin() {
   );
   const linkClasses = clsx(
     "[&>svg]:w-[16px] [&>svg]:h-[16px] px-4",
-    "flex items-center justify-start gap-2",
+    "flex items-center justify-start gap-2 cursor-pointer",
     "transition hover:bg-slate-800 rounded-lg",
     "h-10",
     "shrink-0",
   );
+  const openCloseBtnClasses = clsx(linkClasses, "text-blue-200 italic");
+
   return (
     <nav className={navClasses}>
-      <button>
+      <button className="">
         {!isOpen && (
           <>
             <MenuIcon />
