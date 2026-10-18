@@ -25,7 +25,7 @@ export function MenuAdmin() {
 
   return (
     <nav className={navClasses}>
-      <button className="">
+      <button onClick={() => setIsOpen((s) => !s)} className="">
         {!isOpen && (
           <>
             <MenuIcon />
