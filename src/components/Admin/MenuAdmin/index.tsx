@@ -13,6 +13,7 @@ export function MenuAdmin() {
     "sm:flex-row sm:flex-wrap",
     !isOpen && "h-10",
     !isOpen && "overflow-hidden",
+    "sm:overflow-visible sm:h-auto",
   );
   const linkClasses = clsx(
     "[&>svg]:w-[16px] [&>svg]:h-[16px] px-4",
@@ -21,7 +22,11 @@ export function MenuAdmin() {
     "h-10",
     "shrink-0",
   );
-  const openCloseBtnClasses = clsx(linkClasses, "text-blue-200 italic");
+  const openCloseBtnClasses = clsx(
+    linkClasses,
+    "text-blue-200 italic ",
+    "sm:hidden",
+  );
 
   return (
     <nav className={navClasses}>
