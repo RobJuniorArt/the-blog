@@ -25,7 +25,10 @@ export function MenuAdmin() {
 
   return (
     <nav className={navClasses}>
-      <button onClick={() => setIsOpen((s) => !s)} className="">
+      <button
+        onClick={() => setIsOpen((s) => !s)}
+        className={openCloseBtnClasses}
+      >
         {!isOpen && (
           <>
             <MenuIcon />
@@ -44,7 +47,7 @@ export function MenuAdmin() {
         <HouseIcon />
         Home
       </a>
-      <Link href="/admin/post">
+      <Link className={linkClasses} href="/admin/post">
         <FileText />
         Posts
       </Link>
