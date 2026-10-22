@@ -26,7 +26,7 @@ export function Button({
     lg: clsx(""),
   };
 
-  const buttonClasses = clsx(buttonVariants[variant]);
+  const buttonClasses = clsx(buttonVariants[variant], buttonSizes[size]);
 
   return <button className={buttonClasses} {...props} />;
 }
