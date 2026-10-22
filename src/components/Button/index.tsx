@@ -1,7 +1,11 @@
 import React from "react";
 
-type ButtonProps = {} & React.ComponentProps<"button">;
+type ButtonVariants = "default" | "ghost" | "danger";
 
-export function Button({ ...props }: ButtonProps) {
+type ButtonProps = {
+  variant: ButtonVariants;
+} & React.ComponentProps<"button">;
+
+export function Button({ variant, ...props }: ButtonProps) {
   return <button {...props} />;
 }
