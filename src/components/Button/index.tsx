@@ -21,7 +21,7 @@ export function Button({
   };
 
   const buttonSizes: Record<ButtonSizes, string> = {
-    sm: clsx(""),
+    sm: clsx("text-xs/tight"),
     md: clsx(""),
     lg: clsx(""),
   };
