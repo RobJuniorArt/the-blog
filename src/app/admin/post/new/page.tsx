@@ -2,7 +2,7 @@ import { Button } from "@/components/Button";
 
 export default async function AdminPostNewPage() {
   return (
-    <div className="py-16 flex gap-4 flex-wrap">
+    <div className="py-16 flex gap-4 flex-wrap items-center">
       <Button variant="default" size="sm" type="submit">
         Confirm
       </Button>
