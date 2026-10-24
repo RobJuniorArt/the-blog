@@ -15,9 +15,9 @@ export function Button({
   ...props
 }: ButtonProps) {
   const buttonVariants: Record<ButtonVariants, string> = {
-    default: clsx("bg-blue-600 text-blue-100"),
-    ghost: clsx("bg-slate-200 text-slate-900"),
-    danger: clsx("bg-red-600 text-red-100"),
+    default: clsx("bg-blue-600 text-blue-100 hover:bg-blue-700"),
+    ghost: clsx("bg-slate-200 text-slate-900 hover:bg-slate-300"),
+    danger: clsx("bg-red-600 text-red-100 hover:bg-red-700"),
   };
 
   const buttonSizes: Record<ButtonSizes, string> = {
@@ -47,7 +47,8 @@ export function Button({
   const buttonClasses = clsx(
     buttonVariants[variant],
     buttonSizes[size],
-    "flex items-center justify-center",
+    "flex items-center justify-center cursor-pointer",
+    "transition",
   );
 
   return <button className={buttonClasses} {...props} />;
