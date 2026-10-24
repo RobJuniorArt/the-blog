@@ -49,6 +49,9 @@ export function Button({
     buttonSizes[size],
     "flex items-center justify-center cursor-pointer",
     "transition",
+    "disabled:bg-slate-200",
+    "disabled:text-slate-400",
+    "disabled:cursor-not-allowed",
   );
 
   return <button className={buttonClasses} {...props} />;
