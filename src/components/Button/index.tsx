@@ -16,7 +16,7 @@ export function Button({
 }: ButtonProps) {
   const buttonVariants: Record<ButtonVariants, string> = {
     default: clsx("bg-blue-600 text-blue-100 hover:bg-blue-700"),
-    ghost: clsx("bg-slate-200 text-slate-900 hover:bg-slate-300"),
+    ghost: clsx("bg-slate-300 text-slate-950 hover:bg-slate-400"),
     danger: clsx("bg-red-600 text-red-100 hover:bg-red-700"),
   };
 
@@ -50,7 +50,7 @@ export function Button({
     "flex items-center justify-center cursor-pointer",
     "transition",
     "disabled:bg-slate-200",
-    "disabled:text-slate-400",
+    "disabled:text-slate-500",
     "disabled:cursor-not-allowed",
   );
 
