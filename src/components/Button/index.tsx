@@ -21,9 +21,15 @@ export function Button({
   };
 
   const buttonSizes: Record<ButtonSizes, string> = {
-    sm: clsx('text-xs/tight', 'py-1', 'px-2', 'rounded-sm', '[&_svg]:w-3 [&_svg]:h-3'),
-    md: clsx('text-base/tight', 'py-2', 'px-4', 'rounded-md'),
-    lg: clsx('text-lg/tight', 'py-4', 'px-6', 'rounded-lg',),
+    sm: clsx(
+      "text-xs/tight",
+      "py-1",
+      "px-2",
+      "rounded-sm",
+      "[&_svg]:w-3 [&_svg]:h-3",
+    ),
+    md: clsx("text-base/tight", "py-2", "px-4", "rounded-md"),
+    lg: clsx("text-lg/tight", "py-4", "px-6", "rounded-lg"),
   };
 
   const buttonClasses = clsx(buttonVariants[variant], buttonSizes[size]);
