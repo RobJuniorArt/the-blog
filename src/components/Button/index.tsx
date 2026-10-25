@@ -52,7 +52,8 @@ export function Button({
     "disabled:bg-slate-200",
     "disabled:text-slate-500",
     "disabled:cursor-not-allowed",
+    props.className,
   );
 
-  return <button className={buttonClasses} {...props} />;
+  return <button {...props} className={buttonClasses} />;
 }
