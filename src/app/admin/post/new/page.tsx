@@ -1,5 +1,5 @@
 import { Button } from "@/components/Button";
-import { BugIcon } from "lucide-react";
+import { BanIcon, BugIcon, CheckIcon } from "lucide-react";
 
 export default async function AdminPostNewPage() {
   return (
@@ -28,6 +28,21 @@ export default async function AdminPostNewPage() {
         <Button variant="danger" size="lg" disabled>
           <BugIcon />
           Button
+        </Button>
+
+        <Button variant="danger" size="lg" className="w-full">
+          <BugIcon />
+          Confirm
+        </Button>
+
+        <Button variant="ghost" size="lg" className="w-full">
+          <BanIcon />
+          Cancel
+        </Button>
+
+        <Button variant="default" size="lg" className="w-full">
+          <CheckIcon />
+          OK
         </Button>
       </div>
     </div>
