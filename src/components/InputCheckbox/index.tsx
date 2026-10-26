@@ -21,6 +21,11 @@ export function InputText({
         id={id}
         type={type}
       />
+      {labelText && (
+        <label className="text-sm" htmlFor={id}>
+          {labelText}
+        </label>
+      )}
     </div>
   );
 }
