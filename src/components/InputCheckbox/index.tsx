@@ -6,7 +6,7 @@ type InputCheckboxProps = {
   type?: "checkbox";
 } & React.ComponentProps<"input">;
 
-export function InputText({
+export function InputCheckbox({
   labelText = "",
   type = "checkbox",
   ...props
@@ -14,10 +14,13 @@ export function InputText({
   const id = useId();
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex items-center gap-3">
       <input
         {...props}
-        className={clsx("", props.className)}
+        className={clsx(
+          "w-4 h-4 out-none focus:ring-2 focus:ring-blue-500",
+          props.className,
+        )}
         id={id}
         type={type}
       />

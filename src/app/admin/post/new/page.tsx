@@ -1,4 +1,5 @@
 import { InputText } from "@/components/InputText";
+import { InputCheckbox } from "@/components/InputCheckbox";
 export default async function AdminPostNewPage() {
   return (
     <div className="flex flex-col gap-6">
@@ -8,6 +9,9 @@ export default async function AdminPostNewPage() {
         type="password"
       />
       <InputText labelText="Sobrenome" placeholder="Digite seu sobrenome" />
+
+      <InputCheckbox labelText="Sobrenome" />
+
       <InputText
         disabled
         labelText="Sobrenome"
