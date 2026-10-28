@@ -1,8 +1,4 @@
-import { InputText } from "@/components/InputText";
-import { InputCheckbox } from "@/components/InputCheckbox";
-import { Button } from "@/components/Button";
+import { ManagerPostForm } from "@/components/Admin/ManagerPostForm";
 export default async function AdminPostNewPage() {
-  return (
-  
-  );
+  return <ManagerPostForm />;
 }
