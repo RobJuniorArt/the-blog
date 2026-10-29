@@ -29,11 +29,11 @@ export function ManagerPostForm() {
         />
 
         <MarkdownEditor
-          value={content}
-          setValue={setContent}
           labelText="Conteúdo"
           disabled={false}
           textAreaName="content"
+          value={content}
+          setValue={setContent}
         />
 
         <InputText
