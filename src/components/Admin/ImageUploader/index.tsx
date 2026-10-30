@@ -14,6 +14,9 @@ export function ImageUploader() {
   function handleChange() {
     if (!fileInputRef.current) return;
     const fileInput = fileInputRef.current;
+    const file = fileInput?.files?.[0];
+    if (!file) return;
+    console.log(file);
   }
 
   return (
@@ -28,6 +31,7 @@ export function ImageUploader() {
         Enviar uma Imagem
       </Button>
       <input
+        onChange={handleChange}
         ref={fileInputRef}
         className="hidden"
         name="file"
