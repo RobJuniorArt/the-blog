@@ -2,7 +2,7 @@
 export function ImageUploader() {
   return (
     <div className="flex flex-col gap-2">
-      <input type="file" />
+      <input name="file" type="file" />
     </div>
   );
 }
