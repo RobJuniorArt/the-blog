@@ -10,6 +10,12 @@ export function ImageUploader() {
     if (!fileInputRef.current) return; //tem que usar current
     fileInputRef.current.click();
   }
+
+  function handleChange() {
+    if (!fileInputRef.current) return;
+    const fileInput = fileInputRef.current;
+  }
+
   return (
     <div className="flex flex-col gap-2 py-4">
       <Button
