@@ -24,6 +24,12 @@ export function ImageUploader() {
       fileInput.value = "";
       return;
     }
+
+    const formData = new FormData();
+    formData.append("file", file);
+    //todo: criar a action para uploader de arquivo
+    console.log(formData.get("file"));
+    fileInput.value = "";
   }
 
   return (
