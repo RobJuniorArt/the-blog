@@ -5,13 +5,19 @@ import { ImageUpIcon } from "lucide-react";
 import { useRef } from "react";
 
 export function ImageUploader() {
-  const fileInputRef = useRef(null);
-  function handleChooFile() {
-    //
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  function handleChooseFile() {
+    if (!fileInputRef.current) return; //tem que usar current
+    fileInputRef.current.click();
   }
   return (
     <div className="flex flex-col gap-2 py-4">
-      <Button type="button" className="self-start" size={"md"}>
+      <Button
+        onClick={handleChooseFile}
+        type="button"
+        className="self-start"
+        size={"md"}
+      >
         <ImageUpIcon />
         Enviar uma Imagem
       </Button>
