@@ -1,8 +1,10 @@
 "use client";
 
 import { Button } from "@/components/Button";
+import { IMAGE_UPLOAD_MAX_SIZE } from "@/lib/constants";
 import { ImageUpIcon } from "lucide-react";
 import { useRef } from "react";
+import { toast } from "react-toastify";
 
 export function ImageUploader() {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -16,7 +18,12 @@ export function ImageUploader() {
     const fileInput = fileInputRef.current;
     const file = fileInput?.files?.[0];
     if (!file) return;
-    console.log(file);
+    if (file.size > IMAGE_UPLOAD_MAX_SIZE) {
+      const readableMaxSize = IMAGE_UPLOAD_MAX_SIZE / 104;
+      toast.error(`Imagem muito grande. Max.: ${readableMaxSize}kb`);
+      fileInput.value = "";
+      return;
+    }
   }
 
   return (
