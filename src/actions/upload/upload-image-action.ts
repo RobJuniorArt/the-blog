@@ -6,6 +6,6 @@ export async function uploadImageAction() {
   logColor("Olá da action uploadimageaction");
 
   return {
-    user: "senha do usuario",
+    user: "senha do usuario", //evitar usar helpers e funcoes uteis
   };
 }
