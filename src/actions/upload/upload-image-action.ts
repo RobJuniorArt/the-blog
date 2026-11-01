@@ -1,11 +1,11 @@
 "use server";
 
-import { logColor } from "@/utils/log-color";
+type uploadImageActionResult = {
+  url: string;
+  error: string;
+};
 
-export async function uploadImageAction() {
-  logColor("Olá da action uploadimageaction");
-
-  return {
-    user: "senha do usuario", //evitar usar helpers e funcoes uteis
-  };
+export async function uploadImageAction(): Promise<uploadImageActionResult> {
+  const makeResult = ({ url = "", error = "" }) => ({ url, error });
+  return makeResult({ url: "URL" });
 }

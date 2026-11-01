@@ -35,6 +35,12 @@ export function ImageUploader() {
 
     startTransition(async () => {
       const result = await uploadImageAction();
+      if (result.error) {
+        toast.error(result.error);
+        fileInput.value = "";
+        return;
+      }
+      toast.success(result.url);
     });
 
     fileInput.value = "";
