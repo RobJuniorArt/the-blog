@@ -1,6 +1,8 @@
 "use server";
 
-import { IMAGE_UPLOAD_MAX_SIZE } from "@/lib/constants";
+import { IMAGE_UPLOAD_DIRECTORY, IMAGE_UPLOAD_MAX_SIZE } from "@/lib/constants";
+import { mkdir } from "fs/promises";
+import { extname, resolve } from "path";
 
 type uploadImageActionResult = {
   url: string;
@@ -29,6 +31,21 @@ export async function uploadImageAction(
   if (!file.type.startsWith("image/")) {
     return makeResult({ error: "Imagem inválida" });
   }
+
+  const imageExtension = extname(file.name);
+  const uniqueImageName = `${Date.now()}${imageExtension}}`;
+
+  const uploadFullPath = resolve(
+    process.cwd(),
+    "public",
+    IMAGE_UPLOAD_DIRECTORY,
+  );
+  await mkdir(uploadFullPath, { recursive: true });
+
+  const fileArrayBuffer = await file.arrayBuffer();
+  const buffer = Buffer.from(fileArrayBuffer);
+
+  console.log(uniqueImageName);
 
   return makeResult({ url: "URL" });
 }
