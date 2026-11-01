@@ -1,7 +1,11 @@
 "use server";
 
-import { IMAGE_UPLOAD_DIRECTORY, IMAGE_UPLOAD_MAX_SIZE } from "@/lib/constants";
-import { mkdir } from "fs/promises";
+import {
+  IMAGE_SERVER_URL,
+  IMAGE_UPLOAD_DIRECTORY,
+  IMAGE_UPLOAD_MAX_SIZE,
+} from "@/lib/constants";
+import { mkdir, writeFile } from "fs/promises";
 import { extname, resolve } from "path";
 
 type uploadImageActionResult = {
@@ -45,7 +49,11 @@ export async function uploadImageAction(
   const fileArrayBuffer = await file.arrayBuffer();
   const buffer = Buffer.from(fileArrayBuffer);
 
-  console.log(uniqueImageName);
+  const fileFullPath = resolve(uploadFullPath, uniqueImageName); //caminho completo do arquivo
 
-  return makeResult({ url: "URL" });
+  await writeFile(fileFullPath, buffer);
+
+  const url = `${IMAGE_SERVER_URL}/${uniqueImageName}`;
+
+  return makeResult({ url });
 }
