@@ -31,10 +31,9 @@ export function ImageUploader() {
     const formData = new FormData();
     formData.append("file", file);
     //todo: criar a action para uploader de arquivo
-    console.log(formData.get("file"));
 
     startTransition(async () => {
-      const result = await uploadImageAction();
+      const result = await uploadImageAction(formData);
       if (result.error) {
         toast.error(result.error);
         fileInput.value = "";
