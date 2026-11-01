@@ -37,7 +37,7 @@ export async function uploadImageAction(
   }
 
   const imageExtension = extname(file.name);
-  const uniqueImageName = `${Date.now()}${imageExtension}}`;
+  const uniqueImageName = `${Date.now()}${imageExtension}`;
 
   const uploadFullPath = resolve(
     process.cwd(),
