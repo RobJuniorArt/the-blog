@@ -17,10 +17,13 @@ export function ImageUploader() {
   }
 
   function handleChange() {
+    toast.dismiss();
     if (!fileInputRef.current) return;
     const fileInput = fileInputRef.current;
     const file = fileInput?.files?.[0];
+
     if (!file) return;
+
     if (file.size > IMAGE_UPLOAD_MAX_SIZE) {
       const readableMaxSize = IMAGE_UPLOAD_MAX_SIZE / 104;
       toast.error(`Imagem muito grande. Max.: ${readableMaxSize}kb`);

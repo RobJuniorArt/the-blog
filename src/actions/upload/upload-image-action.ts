@@ -26,5 +26,9 @@ export async function uploadImageAction(
     return makeResult({ error: "Arquivo muito grande" });
   }
 
+  if (!file.type.startsWith("image/")) {
+    return makeResult({ error: "Imagem inválida" });
+  }
+
   return makeResult({ url: "URL" });
 }
