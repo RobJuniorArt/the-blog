@@ -19,16 +19,23 @@ export function ImageUploader() {
 
   function handleChange() {
     toast.dismiss();
-    if (!fileInputRef.current) return;
+    if (!fileInputRef.current) {
+      setImgUrl("");
+      return;
+    }
     const fileInput = fileInputRef.current;
     const file = fileInput?.files?.[0];
 
-    if (!file) return;
+    if (!file) {
+      setImgUrl("");
+      return;
+    }
 
     if (file.size > IMAGE_UPLOAD_MAX_SIZE) {
       const readableMaxSize = IMAGE_UPLOAD_MAX_SIZE / 104;
       toast.error(`Imagem muito grande. Max.: ${readableMaxSize}kb`);
       fileInput.value = "";
+      setImgUrl("");
       return;
     }
 
@@ -58,6 +65,7 @@ export function ImageUploader() {
         type="button"
         className="self-start"
         size={"md"}
+        disabled={isUploading}
       >
         <ImageUpIcon />
         Enviar uma Imagem
@@ -79,6 +87,7 @@ export function ImageUploader() {
         name="file"
         type="file"
         accept="image/*"
+        disabled={isUploading}
       />
     </div>
   );
