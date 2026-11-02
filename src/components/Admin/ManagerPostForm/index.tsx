@@ -9,10 +9,10 @@ import { ImageUploader } from "../ImageUploader";
 import { PostModel } from "@/models/post/post-model";
 
 type ManagerPostFormProps = {
-  post: PostModel;
+  publicPost: PostModel;
 };
 
-export function ManagerPostForm(post: ManagerPostFormProps) {
+export function ManagerPostForm({ publicPost }: ManagerPostFormProps) {
   const [contentValue, setContentValue] = useState("");
 
   return (
