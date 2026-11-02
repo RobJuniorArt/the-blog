@@ -6,8 +6,13 @@ import { InputText } from "@/components/InputText";
 import { MarkdownEditor } from "@/components/MarkdownEditor";
 import { useState } from "react";
 import { ImageUploader } from "../ImageUploader";
+import { PostModel } from "@/models/post/post-model";
 
-export function ManagerPostForm() {
+type ManagerPostFormProps = {
+  post: PostModel;
+};
+
+export function ManagerPostForm(post: ManagerPostFormProps) {
   const [contentValue, setContentValue] = useState("");
 
   return (

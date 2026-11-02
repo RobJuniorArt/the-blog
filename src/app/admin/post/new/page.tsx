@@ -1,4 +1,15 @@
 import { ManagerPostForm } from "@/components/Admin/ManagerPostForm";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Criar Post",
+};
+
 export default async function AdminPostNewPage() {
-  return <ManagerPostForm />;
+  return (
+    <div className="flex flex-col gap-6">
+      <h1 className="text-xl font-extrabold">Criar Post</h1>
+      <ManagerPostForm />
+    </div>
+  );
 }
