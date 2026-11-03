@@ -20,10 +20,13 @@ export function ManagerPostForm({ publicPost }: ManagerPostFormProps) {
     numero: 0,
   };
 
-  const [state] = useActionState(createPostAction, initialState);
+  const [state, action, isPending] = useActionState(
+    createPostAction,
+    initialState,
+  );
 
   return (
-    <form action="" className="mb-16">
+    <form action={action} className="mb-16">
       <div className="flex flex-col gap-6">
         <InputText
           labelText="ID"
