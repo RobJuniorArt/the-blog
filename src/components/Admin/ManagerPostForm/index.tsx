@@ -4,7 +4,7 @@ import { Button } from "@/components/Button";
 import { InputCheckbox } from "@/components/InputCheckbox";
 import { InputText } from "@/components/InputText";
 import { MarkdownEditor } from "@/components/MarkdownEditor";
-import { useActionState, useEffect, useState } from "react";
+import { useActionState, useState } from "react";
 import { ImageUploader } from "../ImageUploader";
 import { PublicPost } from "@/dto/post/dto";
 import { createPostAction } from "@/actions/post/create-post-action";
