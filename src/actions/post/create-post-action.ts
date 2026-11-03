@@ -1,14 +1,14 @@
 "use server";
 
 type CreatePostActionState = {
-  numero: Number;
+  numero: number;
 };
 
 export async function createPostAction(
-  state: CreatePostActionState,
+  prevState: CreatePostActionState,
 ): Promise<CreatePostActionState> {
-  console.log({ state });
+  // console.log({ prevState });
   return {
-    numero: 0,
+    numero: prevState.numero + 1,
   };
 }
