@@ -11,9 +11,10 @@ export async function createPostAction(
   prevState: CreatePostActionState,
   formData: FormData,
 ): Promise<CreatePostActionState> {
-  // console.log({ prevState });
+  const title = formData.get("title")?.toString() || "";
+
   return {
-    formState: prevState.formState,
+    formState: { ...prevState.formState, title },
     errors: [],
   };
 }
