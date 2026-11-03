@@ -4,9 +4,10 @@ import { Button } from "@/components/Button";
 import { InputCheckbox } from "@/components/InputCheckbox";
 import { InputText } from "@/components/InputText";
 import { MarkdownEditor } from "@/components/MarkdownEditor";
-import { useState } from "react";
+import { useActionState, useState } from "react";
 import { ImageUploader } from "../ImageUploader";
 import { PublicPost } from "@/dto/post/dto";
+import { createPostAction } from "@/actions/post/create-post-action";
 
 type ManagerPostFormProps = {
   publicPost?: PublicPost;
@@ -14,6 +15,12 @@ type ManagerPostFormProps = {
 
 export function ManagerPostForm({ publicPost }: ManagerPostFormProps) {
   const [contentValue, setContentValue] = useState(publicPost?.content || "");
+
+  const initialState = {
+    numero: 0,
+  };
+
+  const [state] = useActionState(createPostAction, initialState);
 
   return (
     <form action="" className="mb-16">
