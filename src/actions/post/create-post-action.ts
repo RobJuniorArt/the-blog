@@ -16,9 +16,12 @@ export async function createPostAction(
   if (!(formData instanceof FormData)) {
     return {
       formState: prevState.formState,
-      errors: [],
+      errors: ["Dados inválidos"],
     };
   }
+
+  const formDataToObj = Object.fromEntries(formData.entries());
+  console.log(formDataToObj);
 
   return {
     formState: prevState.formState,
