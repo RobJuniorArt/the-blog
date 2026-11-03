@@ -6,6 +6,7 @@ type CreatePostActionState = {
 
 export async function createPostAction(
   prevState: CreatePostActionState,
+  formData: FormData,
 ): Promise<CreatePostActionState> {
   // console.log({ prevState });
   return {
