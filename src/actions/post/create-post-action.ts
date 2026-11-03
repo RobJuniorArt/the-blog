@@ -11,10 +11,17 @@ export async function createPostAction(
   prevState: CreatePostActionState,
   formData: FormData,
 ): Promise<CreatePostActionState> {
-  const title = formData.get("title")?.toString() || "";
+  //todo: verificar se o usuario esta verificado
+
+  if (!(formData instanceof FormData)) {
+    return {
+      formState: prevState.formState,
+      errors: [],
+    };
+  }
 
   return {
-    formState: { ...prevState.formState, title },
+    formState: prevState.formState,
     errors: [],
   };
 }
