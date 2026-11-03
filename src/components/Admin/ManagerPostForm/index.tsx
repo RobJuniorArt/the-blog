@@ -17,17 +17,14 @@ export function ManagerPostForm({ publicPost }: ManagerPostFormProps) {
   const [contentValue, setContentValue] = useState(publicPost?.content || "");
 
   const initialState = {
-    numero: 0,
+    formState: publicPost,
+    errors: [],
   };
 
   const [state, action, isPending] = useActionState(
     createPostAction,
     initialState,
   );
-
-  useEffect(() => {
-    // console.log(state.numero);
-  }, [state.numero]);
 
   return (
     <form action={action} className="mb-16">
