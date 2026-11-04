@@ -2,6 +2,7 @@
 
 import { makePartialPublicPost, PublicPost } from "@/dto/post/dto";
 import { PostCreateSchema } from "@/lib/post/validations";
+import { PostModel } from "@/models/post/post-model";
 import { getZodErrorMessages } from "@/utils/get-zod-error-messages";
 
 type CreatePostActionState = {
@@ -28,12 +29,22 @@ export async function createPostAction(
   if (!zodParsedObj.success) {
     const errors = getZodErrorMessages(zodParsedObj.error);
     return {
-      formState: makePartialPublicPost(formDataToObj),
       errors,
+      formState: makePartialPublicPost(formDataToObj),
     };
   }
+
+  const validPostData = zodParsedObj.data;
+  const newPost: PostModel = {
+    ...validPostData,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    id: Date.now().toString(),
+    slug: Math.random().toString(36),
+  };
+
   return {
-    formState: prevState.formState,
+    formState: newPost,
     errors: [],
   };
 }
