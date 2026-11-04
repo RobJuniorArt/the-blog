@@ -7,5 +7,5 @@ export const makeSlugFromText = (text: string) => {
     strict: true,
     trim: true,
   });
-  return `${slug}-${makeRandomString()}`;
+  return `${slug}-${makeRandomString()}`; //a string aleatoria é para nao haver repetidos na base de dados
 };
