@@ -1,4 +1,5 @@
 import slugify from "slugify";
+import { makeRandomString } from "./make-randm-string";
 
 export const makeSlugFromText = (text: string) => {
   const slug = slugify(text, {
@@ -6,5 +7,5 @@ export const makeSlugFromText = (text: string) => {
     strict: true,
     trim: true,
   });
-  return slug;
+  return `${slug}-${makeRandomString()}`;
 };
