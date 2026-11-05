@@ -10,6 +10,8 @@ import { makePartialPublicPost, PublicPost } from "@/dto/post/dto";
 import { createPostAction } from "@/actions/post/create-post-action";
 import { error } from "console";
 import { toast } from "react-toastify";
+import { updatePostAction } from "@/actions/post/update-post-action";
+import { create } from "domain";
 
 type ManagerPostFormUpdateProps = {
   mode: "update";
@@ -32,13 +34,18 @@ export function ManagerPostForm(props: ManagerPostFormProps) {
     publicPost = props.publicPost;
   }
 
+  const actionMap = {
+    update: updatePostAction,
+    create: createPostAction,
+  };
+
   const initialState = {
     formState: makePartialPublicPost(publicPost),
     errors: [],
   };
 
   const [state, action, isPending] = useActionState(
-    createPostAction,
+    actionMap[mode],
     initialState,
   );
 
@@ -48,6 +55,13 @@ export function ManagerPostForm(props: ManagerPostFormProps) {
       state.errors.forEach((error) => toast.error(error));
     }
   }, [state.errors]);
+
+  useEffect(() => {
+    if (state.success) {
+      toast.dismiss();
+      toast.success("Post atualizado com sucesso!");
+    }
+  }, [state.success]);
 
   const { formState } = state;
   const [contentValue, setContentValue] = useState(publicPost?.content || "");
@@ -61,6 +75,7 @@ export function ManagerPostForm(props: ManagerPostFormProps) {
           placeholder="ID gerado automaticamente"
           type="text"
           defaultValue={formState.id}
+          disabled={isPending}
           readOnly
         />
 
@@ -70,6 +85,7 @@ export function ManagerPostForm(props: ManagerPostFormProps) {
           placeholder="Slug gerado automaticamente"
           type="text"
           defaultValue={formState.slug}
+          disabled={isPending}
           readOnly
         />
 
@@ -79,6 +95,7 @@ export function ManagerPostForm(props: ManagerPostFormProps) {
           placeholder="Digite o título"
           type="text"
           defaultValue={formState.title}
+          disabled={isPending}
         />
 
         <InputText
@@ -87,6 +104,7 @@ export function ManagerPostForm(props: ManagerPostFormProps) {
           placeholder="Digite o nome do autor"
           type="text"
           defaultValue={formState.author}
+          disabled={isPending}
         />
 
         <InputText
@@ -95,6 +113,7 @@ export function ManagerPostForm(props: ManagerPostFormProps) {
           placeholder="Digite o resumo"
           type="text"
           defaultValue={formState.excerpt}
+          disabled={isPending}
         />
 
         <MarkdownEditor
@@ -102,7 +121,7 @@ export function ManagerPostForm(props: ManagerPostFormProps) {
           value={contentValue}
           setValue={setContentValue}
           textAreaName="content"
-          disabled={false}
+          disabled={isPending}
         />
 
         <ImageUploader />
@@ -113,6 +132,7 @@ export function ManagerPostForm(props: ManagerPostFormProps) {
           placeholder="Digite a utl da imagem"
           type="text"
           defaultValue={formState.coverImageUrl}
+          disabled={isPending}
         />
 
         <InputCheckbox
@@ -120,10 +140,11 @@ export function ManagerPostForm(props: ManagerPostFormProps) {
           name="published"
           type="checkbox"
           defaultChecked={formState.published}
+          disabled={isPending}
         />
 
         <div className="mt-4">
-          <Button type="submit" size={"md"}>
+          <Button type="submit" size={"md"} disabled={isPending}>
             Enviar
           </Button>
         </div>
