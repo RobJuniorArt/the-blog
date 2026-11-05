@@ -11,11 +11,27 @@ import { createPostAction } from "@/actions/post/create-post-action";
 import { error } from "console";
 import { toast } from "react-toastify";
 
-type ManagerPostFormProps = {
-  publicPost?: PublicPost;
+type ManagerPostFormUpdateProps = {
+  mode: "update";
+  publicPost: PublicPost;
 };
 
-export function ManagerPostForm({ publicPost }: ManagerPostFormProps) {
+type ManagerPostFormCreateProps = {
+  mode: "create";
+};
+
+type ManagerPostFormProps =
+  | ManagerPostFormUpdateProps
+  | ManagerPostFormCreateProps;
+
+export function ManagerPostForm(props: ManagerPostFormProps) {
+  const { mode } = props;
+
+  let publicPost;
+  if (mode === "update") {
+    publicPost = props.publicPost;
+  }
+
   const initialState = {
     formState: makePartialPublicPost(publicPost),
     errors: [],
