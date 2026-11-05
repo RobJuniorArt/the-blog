@@ -53,5 +53,5 @@ export async function createPostAction(
   await drizzleDb.insert(postsTable).values(newPost);
 
   revalidatePath("posts");
-  redirect(`/admin/post${newPost.id}`);
+  redirect(`/admin/post/${newPost.id}`);
 }
