@@ -1,7 +1,7 @@
 import { PostModel } from "@/models/post/post-model";
 import { PostRepository } from "./post-repository";
 import { drizzleDb } from "@/db/drizzle/index";
-import { desc, eq, and } from "drizzle-orm";
+import { desc, eq, and, or } from "drizzle-orm";
 import { postsTable } from "@/db/drizzle/schemas";
 import { logColor } from "@/utils/log-color";
 import { asyncDelay } from "@/utils/async-delay";
@@ -54,6 +54,20 @@ export class DrizzlePostRepository implements PostRepository {
       throw new Error(`Post with id "${id}" not found`);
     }
     return post[0];
+  }
+
+  async create(post: PostModel): Promise<PostModel> {
+    const [postExists] = await drizzleDb
+      .select({ id: postsTable.id })
+      .from(postsTable)
+      .where(or(eq(postsTable.id, post.id), eq(postsTable.slug, post.slug)))
+      .limit(1);
+    if (!!postExists) {
+      throw new Error("Post com ID ou Slug já existe na base de dados");
+    }
+
+    await drizzleDb.insert(postsTable).values(post);
+    return post;
   }
 }
 
