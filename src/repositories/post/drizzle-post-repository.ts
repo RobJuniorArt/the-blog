@@ -69,6 +69,21 @@ export class DrizzlePostRepository implements PostRepository {
     await drizzleDb.insert(postsTable).values(post);
     return post;
   }
+
+  async delete(id: string): Promise<PostModel> {
+    const [post] = await drizzleDb
+      .select()
+      .from(postsTable)
+      .where(eq(postsTable.id, id))
+      .limit(1);
+
+    if (!post) {
+      throw new Error("Post não existe");
+    }
+
+    await drizzleDb.delete(postsTable).where(eq(postsTable.id, id));
+    return post;
+  }
 }
 
 // (async () => {

@@ -8,4 +8,5 @@ export interface PostRepository {
 
   //Mutation
   create(post: PostModel): Promise<PostModel>;
+  delete(id: string): Promise<PostModel>;
 }
