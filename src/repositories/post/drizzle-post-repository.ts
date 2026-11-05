@@ -84,6 +84,43 @@ export class DrizzlePostRepository implements PostRepository {
     await drizzleDb.delete(postsTable).where(eq(postsTable.id, id));
     return post;
   }
+
+  async update(
+    id: string,
+    newPostData: Omit<PostModel, "id" | "slug" | "createdAt" | "updatedAt">,
+  ): Promise<PostModel> {
+    // 1. Busca o post antigo usando a sintaxe tradicional com select()
+    const [oldPost] = await drizzleDb
+      .select()
+      .from(postsTable)
+      .where(eq(postsTable.id, id))
+      .limit(1);
+
+    if (!oldPost) {
+      throw new Error("Post não existe");
+    }
+
+    const updatedAt = new Date().toISOString();
+    const postData = {
+      author: newPostData.author,
+      content: newPostData.content,
+      coverImageUrl: newPostData.coverImageUrl,
+      excerpt: newPostData.excerpt,
+      published: newPostData.published,
+      title: newPostData.title,
+      updatedAt,
+    };
+
+    await drizzleDb
+      .update(postsTable)
+      .set(postData)
+      .where(eq(postsTable.id, id));
+
+    return {
+      ...oldPost,
+      ...postData,
+    };
+  }
 }
 
 // (async () => {
