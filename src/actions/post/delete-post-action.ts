@@ -1,11 +1,6 @@
 "use server";
 
-import { drizzleDb } from "@/db/drizzle";
-import { postsTable } from "@/db/drizzle/schemas";
 import { postRepository } from "@/repositories/post";
-import { asyncDelay } from "@/utils/async-delay";
-import { logColor } from "@/utils/log-color";
-import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
 export async function deletePostAction(id: string) {
@@ -17,26 +12,18 @@ export async function deletePostAction(id: string) {
     };
   }
 
-  const post = await postRepository.findById(id).catch(() => undefined);
-
-  if (!post) {
-    return {
-      error: "Post não existe!",
-    };
-  }
+  let post;
 
   try {
-    await postRepository.delete(id);
+    post = await postRepository.delete(id);
   } catch (e: unknown) {
     if (e instanceof Error) {
       return {
-        formState: newPost,
-        errors: [e.message],
+        error: e.message,
       };
     }
     return {
-      formState: newPost,
-      errors: ["Erro desconhecido"],
+      error: "Erro desconhecido",
     };
   }
 
