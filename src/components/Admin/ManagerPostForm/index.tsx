@@ -8,10 +8,8 @@ import { useActionState, useEffect, useState } from "react";
 import { ImageUploader } from "../ImageUploader";
 import { makePartialPublicPost, PublicPost } from "@/dto/post/dto";
 import { createPostAction } from "@/actions/post/create-post-action";
-import { error } from "console";
 import { toast } from "react-toastify";
 import { updatePostAction } from "@/actions/post/update-post-action";
-import { create } from "domain";
 
 type ManagerPostFormUpdateProps = {
   mode: "update";
@@ -124,7 +122,7 @@ export function ManagerPostForm(props: ManagerPostFormProps) {
           disabled={isPending}
         />
 
-        <ImageUploader />
+        <ImageUploader disabled={isPending} />
 
         <InputText
           labelText="Url da imagem de capa"
