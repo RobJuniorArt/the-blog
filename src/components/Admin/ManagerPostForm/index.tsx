@@ -10,6 +10,7 @@ import { makePartialPublicPost, PublicPost } from "@/dto/post/dto";
 import { createPostAction } from "@/actions/post/create-post-action";
 import { toast } from "react-toastify";
 import { updatePostAction } from "@/actions/post/update-post-action";
+import { useRouter, useSearchParams } from "next/navigation";
 
 type ManagerPostFormUpdateProps = {
   mode: "update";
@@ -26,6 +27,9 @@ type ManagerPostFormProps =
 
 export function ManagerPostForm(props: ManagerPostFormProps) {
   const { mode } = props;
+  const searchParams = useSearchParams();
+  const created = searchParams.get("created");
+  const router = useRouter();
 
   let publicPost;
   if (mode === "update") {
@@ -60,6 +64,13 @@ export function ManagerPostForm(props: ManagerPostFormProps) {
       toast.success("Post atualizado com sucesso!");
     }
   }, [state.success]);
+
+  useEffect(() => {
+    if (created === "1") {
+      toast.dismiss();
+      toast.success("Post criado com sucesso!");
+    }
+  }, [created]);
 
   const { formState } = state;
   const [contentValue, setContentValue] = useState(publicPost?.content || "");
