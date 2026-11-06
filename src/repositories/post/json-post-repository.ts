@@ -16,6 +16,18 @@ const JSON_POSTS_FILE_PATH = resolve(
 const SIMULATE_WAIT_IN_MS = 0;
 
 export class JsonPostRepository implements PostRepository {
+  create(post: PostModel): Promise<PostModel> {
+    throw new Error("Method not implemented.");
+  }
+  delete(id: string): Promise<PostModel> {
+    throw new Error("Method not implemented.");
+  }
+  update(
+    id: string,
+    newPostData: Omit<PostModel, "id" | "slug" | "createdAt" | "updatedAt">,
+  ): Promise<PostModel> {
+    throw new Error("Method not implemented.");
+  }
   private async simulateWait() {
     if (SIMULATE_WAIT_IN_MS <= 0) return;
     await new Promise((resolve) => setTimeout(resolve, SIMULATE_WAIT_IN_MS));

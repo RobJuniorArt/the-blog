@@ -5,7 +5,6 @@ import {
   IMAGE_UPLOAD_DIRECTORY,
   IMAGE_UPLOAD_MAX_SIZE,
 } from "@/lib/constants";
-import { asyncDelay } from "@/utils/async-delay";
 import { mkdir, writeFile } from "fs/promises";
 import { extname, resolve } from "path";
 
@@ -18,9 +17,6 @@ export async function uploadImageAction(
   formData: FormData,
 ): Promise<uploadImageActionResult> {
   //TODO:verificar se o usuario esta logado
-
-  //TODO: REMOVER DELAY
-  await asyncDelay(5000, true);
 
   const makeResult = ({ url = "", error = "" }) => ({ url, error });
 
