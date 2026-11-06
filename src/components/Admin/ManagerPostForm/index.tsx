@@ -69,8 +69,11 @@ export function ManagerPostForm(props: ManagerPostFormProps) {
     if (created === "1") {
       toast.dismiss();
       toast.success("Post criado com sucesso!");
+      const url = new URL(window.location.href);
+      url.searchParams.delete("created");
+      router.replace(url.toString());
     }
-  }, [created]);
+  }, [created, router]);
 
   const { formState } = state;
   const [contentValue, setContentValue] = useState(publicPost?.content || "");
