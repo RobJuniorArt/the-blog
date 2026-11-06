@@ -2,7 +2,7 @@ import { PostModel } from "@/models/post/post-model";
 import { PostRepository } from "./post-repository";
 import { resolve } from "path";
 
-import { readFile } from "fs/promises";
+import { readFile, writeFile } from "fs/promises";
 
 const ROOT_DIR = process.cwd();
 const JSON_POSTS_FILE_PATH = resolve(
@@ -16,18 +16,58 @@ const JSON_POSTS_FILE_PATH = resolve(
 const SIMULATE_WAIT_IN_MS = 0;
 
 export class JsonPostRepository implements PostRepository {
-  create(post: PostModel): Promise<PostModel> {
-    throw new Error("Method not implemented.");
+
+  async create(post: PostModel): Promise<PostModel> {
+    const posts = await this.readFromDisk();
+    if (posts.some((existingPost) => existingPost.id === post.id)) {
+      throw new Error(`Post with id "${post.id}" already exists`);
+    }
+
+    posts.push(post);
+    await writeFile(
+      JSON_POSTS_FILE_PATH,
+      JSON.stringify({ posts }, null, 2),
+      "utf-8",
+    );
+    return post;
   }
-  delete(id: string): Promise<PostModel> {
-    throw new Error("Method not implemented.");
+
+  async delete(id: string): Promise<PostModel> {
+    const posts = await this.readFromDisk();
+    const index = posts.findIndex((post) => post.id === id);
+    if (index === -1) throw new Error(`Post with id "${id}" not found`);
+
+    const [deletedPost] = posts.splice(index, 1);
+    await writeFile(
+      JSON_POSTS_FILE_PATH,
+      JSON.stringify({ posts }, null, 2),
+      "utf-8",
+    );
+    return deletedPost;
   }
-  update(
+
+  async update(
     id: string,
     newPostData: Omit<PostModel, "id" | "slug" | "createdAt" | "updatedAt">,
   ): Promise<PostModel> {
-    throw new Error("Method not implemented.");
+    const posts = await this.readFromDisk();
+    const index = posts.findIndex((post) => post.id === id);
+    if (index === -1) throw new Error(`Post with id "${id}" not found`);
+
+    const updatedPost: PostModel = {
+      ...posts[index],
+      ...newPostData,
+      updatedAt: new Date().toISOString(),
+    };
+    posts[index] = updatedPost;
+    await writeFile(
+      JSON_POSTS_FILE_PATH,
+      JSON.stringify({ posts }, null, 2),
+      "utf-8",
+    );
+    return updatedPost;
   }
+
   private async simulateWait() {
     if (SIMULATE_WAIT_IN_MS <= 0) return;
     await new Promise((resolve) => setTimeout(resolve, SIMULATE_WAIT_IN_MS));
