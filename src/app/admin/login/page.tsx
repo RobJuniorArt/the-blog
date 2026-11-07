@@ -18,6 +18,13 @@ export default async function AdminLoginPage() {
           disabled={isPending}
           defaultValue={state.userame}
         />
+        <InputText
+          type="password"
+          name="password"
+          labelText="Senha0"
+          placeholder="Sua senha"
+          disabled={false}
+        />
       </form>
     </div>
   );
