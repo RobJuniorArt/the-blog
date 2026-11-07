@@ -1,3 +1,4 @@
+import { InputText } from "@/components/InputText";
 import clsx from "clsx";
 
 export default async function AdminLoginPage() {
@@ -9,7 +10,14 @@ export default async function AdminLoginPage() {
       )}
     >
       <form action={action} className="flex-1 flex flex-col gap-6">
-        Admin Login Page
+        <InputText
+          type="text"
+          name="username"
+          labelText="Usuário"
+          placeholder="Seu usuário"
+          disabled={isPending}
+          defaultValue={state.userame}
+        />
       </form>
     </div>
   );
