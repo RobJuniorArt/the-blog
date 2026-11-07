@@ -4,11 +4,12 @@ import { drizzleDb } from "@/db/drizzle/index";
 import { desc, eq, and, or } from "drizzle-orm";
 import { postsTable } from "@/db/drizzle/schemas";
 import { asyncDelay } from "@/utils/async-delay";
-import { SIMULATE_WAIT_IN_MS } from "@/lib/constants";
+
+const simulateWaitMs = Number(process.env.SIMULATE_WAIT_IN_MS);
 
 export class DrizzlePostRepository implements PostRepository {
   async findAllPublic(): Promise<PostModel[]> {
-    await asyncDelay(SIMULATE_WAIT_IN_MS, true);
+    await asyncDelay(simulateWaitMs, true);
 
     const posts = await drizzleDb
       .select()
@@ -19,7 +20,7 @@ export class DrizzlePostRepository implements PostRepository {
   }
 
   async findBySlugPublic(slug: string): Promise<PostModel> {
-    await asyncDelay(SIMULATE_WAIT_IN_MS, true);
+    await asyncDelay(simulateWaitMs, true);
 
     const post = await drizzleDb
       .select()
@@ -33,13 +34,13 @@ export class DrizzlePostRepository implements PostRepository {
   }
 
   async findAll(): Promise<PostModel[]> {
-    await asyncDelay(SIMULATE_WAIT_IN_MS, true);
+    await asyncDelay(simulateWaitMs, true);
     const posts = await drizzleDb.select().from(postsTable);
     return posts;
   }
 
   async findById(id: string): Promise<PostModel> {
-    await asyncDelay(SIMULATE_WAIT_IN_MS, true);
+    await asyncDelay(simulateWaitMs, true);
 
     const post = await drizzleDb
       .select()
