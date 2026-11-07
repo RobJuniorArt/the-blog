@@ -4,6 +4,8 @@ import { resolve } from "path";
 
 import { readFile, writeFile } from "fs/promises";
 
+const simulateWaitMs = Number(process.env.SIMULATE_WAIT_IN_MS);
+
 const ROOT_DIR = process.cwd();
 const JSON_POSTS_FILE_PATH = resolve(
   ROOT_DIR,
@@ -13,10 +15,7 @@ const JSON_POSTS_FILE_PATH = resolve(
   "posts.json",
 );
 
-const SIMULATE_WAIT_IN_MS = 0;
-
 export class JsonPostRepository implements PostRepository {
-
   async create(post: PostModel): Promise<PostModel> {
     const posts = await this.readFromDisk();
     if (posts.some((existingPost) => existingPost.id === post.id)) {
@@ -69,8 +68,8 @@ export class JsonPostRepository implements PostRepository {
   }
 
   private async simulateWait() {
-    if (SIMULATE_WAIT_IN_MS <= 0) return;
-    await new Promise((resolve) => setTimeout(resolve, SIMULATE_WAIT_IN_MS));
+    if (simulateWaitMs <= 0) return;
+    await new Promise((resolve) => setTimeout(resolve, simulateWaitMs));
   }
 
   private async readFromDisk(): Promise<PostModel[]> {
