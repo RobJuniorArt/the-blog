@@ -1,3 +1,5 @@
+import clsx from "clsx";
+
 export default async function AdminLoginPage() {
   return (
     <div
@@ -6,7 +8,9 @@ export default async function AdminLoginPage() {
         "text-center max-w-sm mt-16 mb-32 mx-auto",
       )}
     >
-      Admin Login Page
+      <form action={action} className="flex-1 flex flex-col gap-6">
+        Admin Login Page
+      </form>
     </div>
   );
 }
