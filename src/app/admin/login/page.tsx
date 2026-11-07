@@ -1,9 +1,13 @@
+import { loginAction } from "@/actions/login/login-action";
 import { Button } from "@/components/Button";
 import { InputText } from "@/components/InputText";
 import clsx from "clsx";
 import { LogInIcon } from "lucide-react";
+import { useActionState } from "react";
 
 export default async function AdminLoginPage() {
+  const [state, action, isPending] = useActionState(loginAction, undefined);
+
   return (
     <div
       className={clsx(
@@ -17,16 +21,16 @@ export default async function AdminLoginPage() {
           name="username"
           labelText="Usuário"
           placeholder="Seu usuário"
-          disabled={false}
+          disabled={isPending}
         />
         <InputText
           type="password"
           name="password"
           labelText="Senha0"
           placeholder="Sua senha"
-          disabled={false}
+          disabled={isPending}
         />
-        <Button disabled={false} type="submit" className="mt-4" size={"sm"}>
+        <Button disabled={isPending} type="submit" className="mt-4" size={"md"}>
           <LogInIcon />
           Entrar
         </Button>
