@@ -1,5 +1,7 @@
+import { Button } from "@/components/Button";
 import { InputText } from "@/components/InputText";
 import clsx from "clsx";
+import { LogInIcon } from "lucide-react";
 
 export default async function AdminLoginPage() {
   return (
@@ -25,6 +27,10 @@ export default async function AdminLoginPage() {
           placeholder="Sua senha"
           disabled={false}
         />
+        <Button disabled={false} type="submit" className="mt-4" size={"sm"}>
+          <LogInIcon />
+          Entrar
+        </Button>
       </form>
     </div>
   );
