@@ -3,8 +3,8 @@
 import { asyncDelay } from "@/utils/async-delay";
 
 type LoginActionState = {
-  username: "";
-  error: "";
+  username: string;
+  error: string;
 };
 
 export async function loginAction(state: LoginActionState, formData: FormData) {
