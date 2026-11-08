@@ -8,12 +8,15 @@ export async function hashPassword(password: string) {
 
 export async function verifyPassword(password: string, base64Hash: string) {
   const hash = Buffer.from(base64Hash, "base64").toString("utf-8");
-  const isValid = await
-  return bcrypt.comp;
+  return bcrypt.compare(password, hash);
 }
 
 (async () => {
   //BD
-  const hashedPassword = await hashPassword("123456");
-  console.log({ hashedPassword });
+
+  const isPasswordIsValid = await verifyPassword(
+    "123456",
+    "JDJiJDEwJFlLZkpleS44UzdzYmswdFAwWEYvdk9wTi5iQkt2WUI0Qi9aSFVvZk9qMVlHUVpNTVlSZk5x",
+  );
+  console.log({ isPasswordIsValid });
 })();

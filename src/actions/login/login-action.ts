@@ -23,7 +23,7 @@ export async function loginAction(state: LoginActionState, formData: FormData) {
 
   //aqui eu checaria se o usuãrio existe na base de dados
   const isUsernameValid = username === process.env.LOGIN_USER;
-  const isPasswordValid = password === 
+  // const isPasswordValid = password ===
 
   return {
     username: "",
