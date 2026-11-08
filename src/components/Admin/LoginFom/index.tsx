@@ -5,7 +5,8 @@ import { Button } from "@/components/Button";
 import { InputText } from "@/components/InputText";
 import clsx from "clsx";
 import { LogInIcon } from "lucide-react";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 export function LoginForm() {
   const initialState = {
@@ -13,6 +14,13 @@ export function LoginForm() {
     error: "",
   };
   const [state, action, isPending] = useActionState(loginAction, initialState);
+
+  useEffect(() => {
+    if (state.error) {
+      toast.dismiss();
+      toast.error(state.error);
+    }
+  }, [state]);
 
   return (
     <div
@@ -41,6 +49,8 @@ export function LoginForm() {
           <LogInIcon />
           Entrar
         </Button>
+
+        {!!state.error && <p className="text-red-600">{state.error}</p>}
       </form>
     </div>
   );
