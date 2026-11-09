@@ -17,3 +17,9 @@ export async function verifyPassword(password: string, base64Hash: string) {
   const hash = Buffer.from(base64Hash, "base64").toString("utf-8");
   return bcrypt.compare(password, hash);
 }
+
+export async function createLoginSession(username: string) {
+  const expiresAt = new Date(Date.now() + loginExpSeconds * 1000);
+  const loginSession = 'QUALQUER COISA';
+  
+}
