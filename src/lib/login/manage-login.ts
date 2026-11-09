@@ -30,3 +30,9 @@ export async function createLoginSession(username: string) {
     expires: expiresAt,
   });
 }
+
+export async function deleteLoginSession() {
+  const cookieStore = await cookies();
+  cookieStore.set(loginCookieName, "", { expires: new Date(0) });
+  cookieStore.delete(loginCookieName);
+}
