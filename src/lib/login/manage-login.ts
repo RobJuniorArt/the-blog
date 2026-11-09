@@ -3,6 +3,10 @@ import bcrypt from "bcryptjs";
 const jwtSecretKey = process.env.JWT_SECRET_KEY;
 const jwtEncodedKey = new TextEncoder().encode(jwtSecretKey);
 
+const loginExpSeconds = Number(process.env.LOGIN_EXPIRATION_SECONDS) || 600;
+const loginExpStr = process.env.LOGIN_EXPIRATION_STRING || "10m";
+const loginCookieName = process.env.LOGIN_COOKIE_NAME || "loginSession";
+
 export async function hashPassword(password: string) {
   const hash = await bcrypt.hash(password, 10);
   const base64 = Buffer.from(hash).toString("base64");
