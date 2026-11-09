@@ -21,7 +21,7 @@ export async function verifyPassword(password: string, base64Hash: string) {
 
 export async function createLoginSession(username: string) {
   const expiresAt = new Date(Date.now() + loginExpSeconds * 1000);
-  const loginSession = "QUALQUER COISA";
+  const loginSession = username + " QUALQUER COISA";
   const cookieStore = await cookies();
   cookieStore.set(loginCookieName, loginSession, {
     httpOnly: true,
