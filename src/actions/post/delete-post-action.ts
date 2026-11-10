@@ -1,10 +1,18 @@
 "use server";
 
+import { makePartialPublicPost } from "@/dto/post/dto";
+import { verifyLoginSession } from "@/lib/login/manage-login";
 import { postRepository } from "@/repositories/post";
 import { revalidatePath } from "next/cache";
 
 export async function deletePostAction(id: string) {
-  //todo: checar login do usuario
+  const isAuthenticated = await verifyLoginSession();
+
+  if (!isAuthenticated) {
+    return {
+      error: "Faça login novamente em outra aba.",
+    };
+  }
 
   if (!id || typeof id !== "string") {
     return {
