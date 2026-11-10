@@ -53,3 +53,15 @@ export async function signJWT(jwtPayload: JwtPayload) {
     .setExpirationTime(loginExpStr)
     .sign(jwtEncodedKey);
 }
+
+export async function verifyJwt(jwt: string | undefined = "") {
+  try {
+    const { payload } = await jwtVerify(jwt, jwtEncodedKey, {
+      algorithms: ["HS256"],
+    });
+    return payload;
+  } catch (e) {
+    console.log("invalid token", e);
+    return false;
+  }
+}
