@@ -1,9 +1,11 @@
 "use client";
 
+import { logoutAction } from "@/actions/login/logout-action";
 import clsx from "clsx";
 import {
   CircleXIcon,
   FileText,
+  HourglassCogIcon,
   HouseIcon,
   LogOutIcon,
   MenuIcon,
@@ -43,8 +45,11 @@ export function MenuAdmin() {
     "sm:hidden",
   );
 
-  function handleLogout(e) {
+  function handleLogout(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
     e.preventDefault();
+    startTransition(async () => {
+      await logoutAction();
+    });
   }
 
   return (
@@ -80,8 +85,18 @@ export function MenuAdmin() {
         Criar Post
       </Link>
       <a onClick={handleLogout} href="" className={linkClasses}>
-        <LogOutIcon />
-        Sair
+        {isPending && (
+          <>
+            <HourglassCogIcon />
+            Aguarde...
+          </>
+        )}
+        {!isPending && (
+          <>
+            <LogOutIcon />
+            Sair
+          </>
+        )}
       </a>
     </nav>
   );
