@@ -10,7 +10,7 @@ type LoginActionState = {
 };
 
 export async function loginAction(state: LoginActionState, formData: FormData) {
-  await asyncDelay(5000);
+  const allowLogin = Boolean(Number(process.env.ALLOW_LOGIN));
 
   if (!(formData instanceof FormData)) {
     return {
@@ -18,6 +18,8 @@ export async function loginAction(state: LoginActionState, formData: FormData) {
       error: "Dados inválidos",
     };
   }
+
+  await asyncDelay(5000);
 
   //Dados que o usuario digitouno form
   const username = formData.get("username")?.toString().trim() || "";
