@@ -9,6 +9,11 @@ const loginExpSeconds = Number(process.env.LOGIN_EXPIRATION_SECONDS) || 600;
 const loginExpStr = process.env.LOGIN_EXPIRATION_STRING || "10m";
 const loginCookieName = process.env.LOGIN_COOKIE_NAME || "loginSession";
 
+type JwtPayload = {
+  username: string;
+  expiresAt: Date;
+};
+
 export async function hashPassword(password: string) {
   const hash = await bcrypt.hash(password, 10);
   const base64 = Buffer.from(hash).toString("base64");
@@ -36,4 +41,15 @@ export async function deleteLoginSession() {
   const cookieStore = await cookies();
   cookieStore.set(loginCookieName, "", { expires: new Date(0) });
   cookieStore.delete(loginCookieName);
+}
+
+export async function signJWT(jwtPayload: JwtPayload) {
+  return new SignJWT(jwtPayload)
+    .setProtectedHeader({
+      alg: "HS25",
+      typ: "JWT",
+    })
+    .setIssuedAt()
+    .setExpirationTime(loginExpStr)
+    .sign(jwtEncodedKey);
 }
