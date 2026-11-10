@@ -54,6 +54,19 @@ export async function signJWT(jwtPayload: JwtPayload) {
     .sign(jwtEncodedKey);
 }
 
+export async function getLoginSession() {
+  const cookieStore = await cookies();
+  const jwt = cookieStore.get(loginCookieName)?.value;
+  if (!jwt) return false;
+  return verifyJwt(jwt);
+}
+
+export async function verifyLoginSession() {
+  const jwtPayload = await getLoginSession();
+  if (!jwtPayload) return false;
+  return jwtPayload?.username === process.env.LOGIN_USER;
+}
+
 export async function verifyJwt(jwt: string | undefined = "") {
   try {
     const { payload } = await jwtVerify(jwt, jwtEncodedKey, {
