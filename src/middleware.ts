@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyJwt } from "./lib/login/manage-login";
+import { LogIn } from "lucide-react";
 
 export async function middleware(request: NextRequest) {
   const isLoginPage = request.nextUrl.pathname.startsWith("/admin/login");
@@ -17,7 +18,12 @@ export async function middleware(request: NextRequest) {
   const jwtSession = request.cookies.get(
     process.env.LOGIN_COOKIE_NAME || "loginSession",
   )?.value;
-  const isAutenticated = await verifyJwt(jwtSession);
+  const isAuthenticated = await verifyJwt(jwtSession);
+
+  if (!isAuthenticated) {
+    const loginUrl = new URL("/admin/login", request.url);
+    return NextResponse.redirect(loginUrl);
+  }
 
   return NextResponse.next();
 }
